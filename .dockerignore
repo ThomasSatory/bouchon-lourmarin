@@ -1,0 +1,9 @@
+.git
+.gitignore
+.DS_Store
+README.md
+.claude
+.agents
+node_modules
+*.log
+skills-lock.json

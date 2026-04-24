@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://bouchon-lourmarin.toam.tech/</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://bouchon-lourmarin.toam.tech/assets/photos/hero-01.jpg</image:loc>
+      <image:title>Le Bouchon — restaurant de tapas à Lourmarin</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://bouchon-lourmarin.toam.tech/assets/photos/plat-01.jpg</image:loc>
+      <image:title>Le poulet shish taouk mariné 48h</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://bouchon-lourmarin.toam.tech/assets/photos/plat-04.jpg</image:loc>
+      <image:title>Le pastrami végé — céleri rave laqué au vin rouge</image:title>
+    </image:image>
+  </url>
+</urlset>
