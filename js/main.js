@@ -96,11 +96,15 @@
     if (Array.isArray(site.hours) && site.hours.length) {
       const list = document.getElementById('hoursList');
       if (list) {
-        list.innerHTML = site.hours.map(h => `
+        list.innerHTML = site.hours.map(h => {
+          const parts = String(h.value || '').split('·').map(s => s.trim()).filter(Boolean);
+          const spans = (parts.length ? parts : ['']).map(p => `<span>${escapeHtml(p)}</span>`).join('');
+          return `
           <div${h.closed ? ' class="hours__closed"' : ''}>
             <dt>${escapeHtml(h.days || '')}</dt>
-            <dd>${escapeHtml(h.value || '')}</dd>
-          </div>`).join('');
+            <dd>${spans}</dd>
+          </div>`;
+        }).join('');
       }
     }
   };
