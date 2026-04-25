@@ -189,6 +189,7 @@
       <nav class="nav__links" aria-label="Navigation principale">
         <a href="#histoire">Notre histoire</a>
         <a href="#carte">La carte</a>
+        <a href="#actualites">Actualités</a>
         <a href="#galerie">Galerie</a>
         <a href="#avis">Avis</a>
         <a href="#contact">Contact</a>
@@ -204,6 +205,7 @@
     <div class="nav__mobile" id="mobileMenu" hidden>
       <a href="#histoire">Notre histoire</a>
       <a href="#carte">La carte</a>
+      <a href="#actualites">Actualités</a>
       <a href="#galerie">Galerie</a>
       <a href="#contact">Contact</a>
       <a href="tel:+33490091816" class="btn btn--primary">Réserver — 04 90 09 18 16</a>
@@ -215,7 +217,7 @@
     <!-- HERO -->
     <section class="hero">
       <div class="hero__media">
-        <img src="assets/photos/hero-01.jpg" alt="Salle du Bouchon, restaurant de tapas à Lourmarin" width="1920" height="1280" loading="eager" fetchpriority="high" />
+        <img data-photo-key="hero-01" src="assets/photos/hero-01.jpg" alt="Salle du Bouchon, restaurant de tapas à Lourmarin" width="1920" height="1280" loading="eager" fetchpriority="high" />
         <div class="hero__scrim" aria-hidden="true"></div>
       </div>
 
@@ -239,14 +241,14 @@
     <!-- GALLERY STRIP -->
     <section class="strip" aria-label="Photos du restaurant">
       <div class="strip__track">
-        <figure><img src="assets/photos/plat-01.jpg" alt="Le poulet shish taouk, mariné 48h dans nos épices" loading="lazy" /></figure>
-        <figure><img src="assets/photos/plat-04.jpg" alt="Le pastrami végé — céleri rave laqué au vin rouge" loading="lazy" /></figure>
-        <figure><img src="assets/photos/hero-02.jpg" alt="Banquette et tables du Bouchon" loading="lazy" /></figure>
-        <figure><img src="assets/photos/plat-02.jpg" alt="Shawarma de champignons à partager" loading="lazy" /></figure>
-        <figure><img src="assets/photos/plat-09.jpg" alt="Cocktails maison sur la carte du Bouchon" loading="lazy" /></figure>
-        <figure><img src="assets/photos/plat-06.jpg" alt="Le mouhalabié, dessert au lait et pistaches" loading="lazy" /></figure>
-        <figure><img src="assets/photos/plat-13.jpg" alt="Petites bouchées dressées" loading="lazy" /></figure>
-        <figure><img src="assets/photos/hero-03.jpg" alt="Sauces maison en bocal" loading="lazy" /></figure>
+        <figure><img data-photo-key="strip-1" src="assets/photos/plat-01.jpg" alt="Le poulet shish taouk, mariné 48h dans nos épices" loading="lazy" /></figure>
+        <figure><img data-photo-key="strip-2" src="assets/photos/plat-04.jpg" alt="Le pastrami végé — céleri rave laqué au vin rouge" loading="lazy" /></figure>
+        <figure><img data-photo-key="strip-3" src="assets/photos/hero-02.jpg" alt="Banquette et tables du Bouchon" loading="lazy" /></figure>
+        <figure><img data-photo-key="strip-4" src="assets/photos/plat-02.jpg" alt="Shawarma de champignons à partager" loading="lazy" /></figure>
+        <figure><img data-photo-key="strip-5" src="assets/photos/plat-09.jpg" alt="Cocktails maison sur la carte du Bouchon" loading="lazy" /></figure>
+        <figure><img data-photo-key="strip-6" src="assets/photos/plat-06.jpg" alt="Le mouhalabié, dessert au lait et pistaches" loading="lazy" /></figure>
+        <figure><img data-photo-key="strip-7" src="assets/photos/plat-13.jpg" alt="Petites bouchées dressées" loading="lazy" /></figure>
+        <figure><img data-photo-key="strip-8" src="assets/photos/hero-03.jpg" alt="Sauces maison en bocal" loading="lazy" /></figure>
       </div>
     </section>
 
@@ -254,7 +256,7 @@
     <section class="histoire" id="histoire">
       <div class="histoire__grid">
         <div class="histoire__media reveal">
-          <img src="assets/photos/plat-14.jpg" alt="Une table dressée au Bouchon — bouchées, dips et charcuterie à partager" loading="lazy" />
+          <img data-photo-key="histoire" src="assets/photos/plat-14.jpg" alt="Une table dressée au Bouchon — bouchées, dips et charcuterie à partager" loading="lazy" />
           <div class="histoire__badge">
             <span class="script">au cœur de</span>
             <strong>Lourmarin</strong>
@@ -459,24 +461,43 @@
       </header>
       <div class="gallery__grid">
         <figure class="gallery__item gallery__item--tall reveal">
-          <img src="assets/photos/plat-04.jpg" alt="Le pastrami végé — céleri rave laqué au vin rouge" loading="lazy" />
+          <img data-photo-key="gallery-1" src="assets/photos/plat-04.jpg" alt="Le pastrami végé — céleri rave laqué au vin rouge" loading="lazy" />
         </figure>
         <figure class="gallery__item reveal">
-          <img src="assets/photos/plat-01.jpg" alt="Le poulet shish taouk mariné 48h dans nos épices" loading="lazy" />
+          <img data-photo-key="gallery-2" src="assets/photos/plat-01.jpg" alt="Le poulet shish taouk mariné 48h dans nos épices" loading="lazy" />
         </figure>
         <figure class="gallery__item reveal">
-          <img src="assets/photos/plat-06.jpg" alt="Le mouhalabié — crème de lait, pistaches torréfiées" loading="lazy" />
+          <img data-photo-key="gallery-3" src="assets/photos/plat-06.jpg" alt="Le mouhalabié — crème de lait, pistaches torréfiées" loading="lazy" />
         </figure>
         <figure class="gallery__item gallery__item--wide reveal">
-          <img src="assets/photos/plat-11.jpg" alt="Dips, labneh et pita — partage à la table du Bouchon" loading="lazy" />
+          <img data-photo-key="gallery-4" src="assets/photos/plat-11.jpg" alt="Dips, labneh et pita — partage à la table du Bouchon" loading="lazy" />
         </figure>
         <figure class="gallery__item reveal">
-          <img src="assets/photos/plat-13.jpg" alt="Bouchées de champignons farcis dressées à l'assiette" loading="lazy" />
+          <img data-photo-key="gallery-5" src="assets/photos/plat-13.jpg" alt="Bouchées de champignons farcis dressées à l'assiette" loading="lazy" />
         </figure>
         <figure class="gallery__item reveal">
-          <img src="assets/photos/plat-05.jpg" alt="L'octopus pogo, façon corn dog, sauce tonkatsu" loading="lazy" />
+          <img data-photo-key="gallery-6" src="assets/photos/plat-05.jpg" alt="L'octopus pogo, façon corn dog, sauce tonkatsu" loading="lazy" />
         </figure>
       </div>
+    </section>
+
+    <!-- ACTUALITÉS -->
+    <section class="news" id="actualites" aria-label="Actualités du Bouchon">
+      <header class="section-head">
+        <p class="eyebrow">Le carnet du Bouchon</p>
+        <h2>Les actualités.</h2>
+        <p class="section-sub">
+          Événements, nouvelles recettes, soirées à thème — les dernières nouvelles de la maison.
+        </p>
+      </header>
+
+      <div class="news__grid" id="newsGrid" aria-live="polite">
+        <!-- Injected by js/main.js -->
+      </div>
+
+      <p class="news__empty" id="newsEmpty" hidden>
+        Rien de neuf pour le moment — on prépare quelque chose, revenez vite.
+      </p>
     </section>
 
     <!-- TÉMOIGNAGES -->
@@ -609,19 +630,19 @@
         <div class="reserve__right reveal">
           <div class="info-card">
             <h3>Nous trouver</h3>
-            <address>
-              9, rue du Grand Pré<br />
-              84160 Lourmarin<br />
-              Luberon · Provence
+            <address id="mapAddress">
+              <span data-map-field="address1">9, rue du Grand Pré</span><br />
+              <span data-map-field="address2">84160 Lourmarin</span><br />
+              <span data-map-field="address3">Luberon · Provence</span>
             </address>
-            <a class="info-card__link" href="https://maps.google.com/?q=Le+Bouchon+9+Rue+du+Grand+Pré+Lourmarin" target="_blank" rel="noopener">
+            <a class="info-card__link" id="mapLink" href="https://maps.google.com/?q=Le+Bouchon+9+Rue+du+Grand+Pré+Lourmarin" target="_blank" rel="noopener">
               Itinéraire &rarr;
             </a>
           </div>
 
           <div class="info-card">
             <h3>Horaires</h3>
-            <dl class="hours">
+            <dl class="hours" id="hoursList">
               <div><dt>Mardi – Jeudi</dt><dd>19h00 – 01h00</dd></div>
               <div><dt>Vendredi</dt><dd>11h30 – 14h00 · 19h00 – 01h00</dd></div>
               <div><dt>Samedi</dt><dd>12h00 – 14h00 · 19h00 – 01h00</dd></div>
@@ -646,7 +667,7 @@
         <span aria-hidden="true">·</span>
         <a href="https://www.instagram.com/bouchonlourmarin/" target="_blank" rel="noopener">Instagram</a>
         <span aria-hidden="true">·</span>
-        <a href="https://maps.google.com/?q=Le+Bouchon+9+Rue+du+Grand+Pré+Lourmarin" target="_blank" rel="noopener">9 rue du Grand Pré, Lourmarin</a>
+        <a id="footerMapLink" href="https://maps.google.com/?q=Le+Bouchon+9+Rue+du+Grand+Pré+Lourmarin" target="_blank" rel="noopener">9 rue du Grand Pré, Lourmarin</a>
       </div>
       <p class="footer__copy">© <span id="year"></span> Le Bouchon — Martin, Jeremy &amp; Thomas</p>
     </div>

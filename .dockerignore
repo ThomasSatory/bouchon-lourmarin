@@ -1,9 +1,13 @@
 .git
 .gitignore
 .DS_Store
-README.md
 .claude
 .agents
 node_modules
+server/node_modules
+server/data/content.json
+server/data/sessions.json
+assets/uploads
 *.log
 skills-lock.json
+nginx.conf

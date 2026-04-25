@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Admin · Le Bouchon</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600&family=Caveat:wght@600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/admin/admin.css" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+</head>
+<body>
+
+  <!-- LOGIN -->
+  <section class="login" id="loginView">
+    <div class="login__card">
+      <div class="login__brand">
+        <span class="login__script">Le</span>
+        <span class="login__mark">BOUCHON</span>
+      </div>
+      <h1 class="login__title">Espace administration</h1>
+      <p class="login__sub">Saisissez le mot de passe qui vous a été transmis.</p>
+
+      <form id="loginForm" autocomplete="off" novalidate>
+        <label for="loginPassword" class="field__label">Mot de passe</label>
+        <div class="field__wrap">
+          <input
+            id="loginPassword"
+            name="password"
+            type="password"
+            required
+            autocomplete="current-password"
+            class="input"
+            placeholder="••••••••"
+          />
+          <button type="button" class="field__toggle" id="togglePwd" aria-label="Afficher le mot de passe">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+
+        <p class="login__error" id="loginError" role="alert" aria-live="polite" hidden>Mot de passe incorrect.</p>
+
+        <button type="submit" class="btn btn--primary btn--lg" id="loginSubmit">
+          <span class="btn__label">Se connecter</span>
+          <span class="btn__spinner" aria-hidden="true"></span>
+        </button>
+      </form>
+
+      <a href="/" class="login__back">← Retour au site</a>
+    </div>
+  </section>
+
+  <!-- DASHBOARD -->
+  <div class="dash" id="dashView" hidden>
+    <aside class="side">
+      <div class="side__brand">
+        <span class="side__script">Le</span>
+        <span class="side__mark">BOUCHON</span>
+        <span class="side__badge">ADMIN</span>
+      </div>
+      <nav class="side__nav" role="tablist" aria-label="Sections d'administration">
+        <button class="tab is-active" data-tab="news" role="tab" aria-selected="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+          Actualités
+          <span class="tab__count" id="newsCount">0</span>
+        </button>
+        <button class="tab" data-tab="photos" role="tab" aria-selected="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M21 17l-5-5-7 7"/></svg>
+          Photos
+          <span class="tab__count" id="photosCount">0</span>
+        </button>
+        <button class="tab" data-tab="map" role="tab" aria-selected="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s7-7.5 7-13a7 7 0 1 0-14 0c0 5.5 7 13 7 13z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Carte
+        </button>
+        <button class="tab" data-tab="info" role="tab" aria-selected="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 8v.01M11 12h1v4h1"/></svg>
+          Infos
+        </button>
+      </nav>
+      <div class="side__foot">
+        <a href="/" target="_blank" rel="noopener" class="side__link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 3h6v6M10 14L21 3M21 13v7H3V3h7"/></svg>
+          Voir le site
+        </a>
+        <button id="logoutBtn" class="side__logout">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+          Déconnexion
+        </button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+      <!-- NEWS PANEL -->
+      <section class="panel is-active" data-panel="news">
+        <header class="panel__head">
+          <div>
+            <p class="eyebrow">Le carnet du Bouchon</p>
+            <h1>Actualités</h1>
+            <p class="panel__sub">Publiez des événements, des nouvelles recettes, des soirées à thème — visibles immédiatement sur la page d'accueil.</p>
+          </div>
+          <button class="btn btn--primary" id="newsAddBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            Nouvelle actualité
+          </button>
+        </header>
+
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="width: 60px;">Img</th>
+                <th>Titre</th>
+                <th style="width: 140px;">Date</th>
+                <th style="width: 110px;">État</th>
+                <th style="width: 130px;" class="th--right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="newsTbody">
+              <tr class="table__empty"><td colspan="5">Chargement…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- PHOTOS PANEL -->
+      <section class="panel" data-panel="photos">
+        <header class="panel__head">
+          <div>
+            <p class="eyebrow">Visuels du site</p>
+            <h1>Photos</h1>
+            <p class="panel__sub">Remplacez n'importe quelle photo du site. Les images sont automatiquement optimisées.</p>
+          </div>
+        </header>
+        <div class="photos-grid" id="photosGrid"></div>
+      </section>
+
+      <!-- MAP PANEL -->
+      <section class="panel" data-panel="map">
+        <header class="panel__head">
+          <div>
+            <p class="eyebrow">Emplacement</p>
+            <h1>Carte & adresse</h1>
+            <p class="panel__sub">Adresse affichée sur le site, coordonnées pour Google Maps.</p>
+          </div>
+        </header>
+
+        <form class="form-card" id="mapForm">
+          <div class="form-row">
+            <label class="field">
+              <span class="field__label">Adresse (ligne 1)</span>
+              <input class="input" name="address1" type="text" />
+            </label>
+            <label class="field">
+              <span class="field__label">Code postal · Ville</span>
+              <input class="input" name="address2" type="text" />
+            </label>
+          </div>
+          <label class="field">
+            <span class="field__label">Complément (région)</span>
+            <input class="input" name="address3" type="text" />
+          </label>
+
+          <div class="form-row">
+            <label class="field">
+              <span class="field__label">Latitude</span>
+              <input class="input" name="latitude" type="number" step="0.000001" />
+            </label>
+            <label class="field">
+              <span class="field__label">Longitude</span>
+              <input class="input" name="longitude" type="number" step="0.000001" />
+            </label>
+          </div>
+          <label class="field">
+            <span class="field__label">Lien Google Maps</span>
+            <input class="input" name="mapsUrl" type="url" placeholder="https://maps.google.com/?q=..." />
+            <span class="field__hint">URL complète vers Google Maps (pour le bouton "Itinéraire").</span>
+          </label>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn--primary">Enregistrer</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- INFO PANEL -->
+      <section class="panel" data-panel="info">
+        <header class="panel__head">
+          <div>
+            <p class="eyebrow">Infos pratiques</p>
+            <h1>Contact & horaires</h1>
+            <p class="panel__sub">Téléphone, Instagram, et horaires d'ouverture.</p>
+          </div>
+        </header>
+
+        <form class="form-card" id="contactForm">
+          <h2 class="form-card__title">Contact</h2>
+          <div class="form-row">
+            <label class="field">
+              <span class="field__label">Téléphone affiché</span>
+              <input class="input" name="phone" type="text" />
+            </label>
+            <label class="field">
+              <span class="field__label">Téléphone international (tel:)</span>
+              <input class="input" name="phoneIntl" type="text" placeholder="+33..." />
+            </label>
+          </div>
+          <div class="form-row">
+            <label class="field">
+              <span class="field__label">Lien Instagram</span>
+              <input class="input" name="instagram" type="url" />
+            </label>
+            <label class="field">
+              <span class="field__label">Handle affiché</span>
+              <input class="input" name="instagramHandle" type="text" placeholder="@bouchonlourmarin" />
+            </label>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn--primary">Enregistrer le contact</button>
+          </div>
+        </form>
+
+        <form class="form-card" id="hoursForm">
+          <h2 class="form-card__title">Horaires</h2>
+          <div id="hoursRows" class="hours-rows"></div>
+          <div class="form-actions form-actions--between">
+            <button type="button" class="btn btn--ghost" id="addHourRow">+ Ajouter une ligne</button>
+            <button type="submit" class="btn btn--primary">Enregistrer les horaires</button>
+          </div>
+        </form>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- NEWS MODAL -->
+  <div class="modal" id="newsModal" hidden>
+    <div class="modal__overlay" data-close></div>
+    <div class="modal__card" role="dialog" aria-modal="true" aria-labelledby="newsModalTitle">
+      <header class="modal__head">
+        <h2 id="newsModalTitle">Nouvelle actualité</h2>
+        <button class="modal__close" data-close aria-label="Fermer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </header>
+
+      <form id="newsForm" class="modal__body">
+        <input type="hidden" name="id" />
+
+        <label class="field">
+          <span class="field__label">Titre <span class="field__req">*</span></span>
+          <input class="input" name="title" type="text" required maxlength="200" placeholder="Ex. : Soirée tapas & vin naturel" />
+        </label>
+
+        <div class="form-row">
+          <label class="field">
+            <span class="field__label">Date</span>
+            <input class="input" name="date" type="date" />
+          </label>
+          <label class="field field--inline">
+            <span class="field__label">Publié</span>
+            <label class="switch">
+              <input type="checkbox" name="published" checked />
+              <span class="switch__track"><span class="switch__thumb"></span></span>
+            </label>
+          </label>
+        </div>
+
+        <label class="field">
+          <span class="field__label">Texte <span class="field__req">*</span></span>
+          <textarea class="input input--textarea" name="body" required rows="7" placeholder="Racontez l'événement ou la nouveauté…"></textarea>
+          <span class="field__hint">Les sauts de ligne sont préservés sur le site.</span>
+        </label>
+
+        <div class="field">
+          <span class="field__label">Image (optionnelle)</span>
+          <div class="upload" id="newsUpload">
+            <input type="file" accept="image/*" id="newsImageInput" hidden />
+            <div class="upload__preview" id="newsImagePreview">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M21 17l-5-5-7 7"/></svg>
+              <span>Aucune image</span>
+            </div>
+            <div class="upload__actions">
+              <button type="button" class="btn btn--ghost btn--sm" id="newsImagePick">Choisir une image</button>
+              <button type="button" class="btn btn--text" id="newsImageClear" hidden>Retirer</button>
+            </div>
+          </div>
+          <input type="hidden" name="image" />
+        </div>
+
+        <footer class="modal__foot">
+          <button type="button" class="btn btn--ghost" data-close>Annuler</button>
+          <button type="submit" class="btn btn--primary" id="newsSubmit">
+            <span class="btn__label">Enregistrer</span>
+            <span class="btn__spinner" aria-hidden="true"></span>
+          </button>
+        </footer>
+      </form>
+    </div>
+  </div>
+
+  <!-- CONFIRM MODAL -->
+  <div class="modal modal--sm" id="confirmModal" hidden>
+    <div class="modal__overlay" data-close></div>
+    <div class="modal__card" role="alertdialog" aria-modal="true">
+      <header class="modal__head">
+        <h2 id="confirmTitle">Confirmer</h2>
+      </header>
+      <div class="modal__body">
+        <p id="confirmText" style="margin:0;">Êtes-vous sûr ?</p>
+      </div>
+      <footer class="modal__foot">
+        <button type="button" class="btn btn--ghost" data-close>Annuler</button>
+        <button type="button" class="btn btn--danger" id="confirmOk">Supprimer</button>
+      </footer>
+    </div>
+  </div>
+
+  <script src="/admin/admin.js" defer></script>
+</body>
+</html>

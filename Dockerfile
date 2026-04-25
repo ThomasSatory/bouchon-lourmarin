@@ -1,13 +1,31 @@
-FROM nginx:1.27-alpine
+FROM node:20-alpine
 
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+WORKDIR /app
 
-COPY index.html robots.txt sitemap.xml /usr/share/nginx/html/
-COPY assets/ /usr/share/nginx/html/assets/
-COPY css/    /usr/share/nginx/html/css/
-COPY js/     /usr/share/nginx/html/js/
+# Install server dependencies first (better layer cache)
+COPY server/package.json ./server/package.json
+RUN cd server && npm install --omit=dev
 
-EXPOSE 80
+# Copy the rest of the site
+COPY index.html robots.txt sitemap.xml ./
+COPY assets/ ./assets/
+COPY css/    ./css/
+COPY js/     ./js/
+COPY admin/  ./admin/
+COPY server/ ./server/
 
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s \
-  CMD wget -qO- http://localhost/ >/dev/null 2>&1 || exit 1
+# Data and uploads live in volumes
+RUN mkdir -p /app/server/data /app/assets/uploads \
+ && chown -R node:node /app
+
+USER node
+
+ENV NODE_ENV=production
+ENV PORT=3000
+
+EXPOSE 3000
+
+HEALTHCHECK --interval=30s --timeout=3s --start-period=10s \
+  CMD wget -qO- http://localhost:3000/ >/dev/null 2>&1 || exit 1
+
+CMD ["node", "server/server.js"]
