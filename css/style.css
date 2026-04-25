@@ -333,27 +333,31 @@ p { margin: 0 0 1rem; }
 
 .hero__scroll {
   position: absolute;
-  bottom: 1.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 78px; height: 96px;
+  bottom: 2.25rem;
+  left: calc(50% - 48px);
+  width: 96px; height: 110px;
   display: block;
   pointer-events: auto;
-  opacity: .9;
+  opacity: 0;
   transition: opacity .3s var(--ease);
+  animation: fadeUp .8s 1.75s var(--ease) forwards;
+  z-index: 3;
 }
 .hero__scroll:hover { opacity: 1; }
+@media (max-width: 820px) {
+  .hero__scroll { display: none; }
+}
 .hero__scroll svg { width: 100%; height: 100%; overflow: visible; display: block; }
 .hero__scroll path {
   fill: none;
-  stroke: var(--cream);
-  stroke-width: 2.4;
+  stroke: var(--terracotta);
+  stroke-width: 3.6;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-dasharray: 100;
   stroke-dashoffset: 100;
-  animation: hero-scroll-draw 3.4s cubic-bezier(.6,.05,.4,1) infinite;
-  filter: drop-shadow(0 1px 2px rgba(0,0,0,.25));
+  animation: hero-scroll-draw 3.4s 1.95s cubic-bezier(.6,.05,.4,1) infinite;
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,.35));
 }
 @keyframes hero-scroll-draw {
   0%   { stroke-dashoffset: 100; }
