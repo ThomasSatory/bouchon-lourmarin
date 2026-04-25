@@ -11,6 +11,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600&family=Caveat:wght@600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/admin/admin.css" />
   <link rel="icon" type="image/png" href="/assets/favicon.png" />
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </head>
 <body>
 
@@ -166,15 +171,15 @@
             <input class="input" name="address3" type="text" />
           </label>
 
-          <div class="form-row">
-            <label class="field">
-              <span class="field__label">Latitude</span>
-              <input class="input" name="latitude" type="number" step="0.000001" />
-            </label>
-            <label class="field">
-              <span class="field__label">Longitude</span>
-              <input class="input" name="longitude" type="number" step="0.000001" />
-            </label>
+          <div class="field">
+            <span class="field__label">Position sur la carte</span>
+            <div id="mapPicker" class="map-picker"></div>
+            <span class="field__hint">
+              Glissez le marqueur pour ajuster la position. Coordonnées :
+              <code id="mapPickerCoords">—</code>
+            </span>
+            <input name="latitude" type="hidden" />
+            <input name="longitude" type="hidden" />
           </div>
           <label class="field">
             <span class="field__label">Lien Google Maps</span>

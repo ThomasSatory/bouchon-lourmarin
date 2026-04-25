@@ -121,6 +121,9 @@
         b.setAttribute('aria-selected', String(active));
       });
       $$('.panel').forEach(p => p.classList.toggle('is-active', p.dataset.panel === key));
+      if (key === 'map' && typeof pickerMap !== 'undefined' && pickerMap) {
+        setTimeout(() => pickerMap.invalidateSize(), 50);
+      }
     });
   });
 
@@ -396,14 +399,55 @@
   // MAP FORM
   // ============================================================
   const mapForm = $('#mapForm');
+
+  const LOURMARIN_DEFAULT = [43.7639, 5.3621];
+  let pickerMap = null;
+  let pickerMarker = null;
+  const coordsReadout = $('#mapPickerCoords');
+
+  const setPickerCoords = (lat, lng) => {
+    mapForm.elements.latitude.value = lat.toFixed(6);
+    mapForm.elements.longitude.value = lng.toFixed(6);
+    if (coordsReadout) coordsReadout.textContent = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+  };
+
+  const initPickerMap = (lat, lng) => {
+    const el = document.getElementById('mapPicker');
+    if (!el || typeof L === 'undefined') return;
+    if (!pickerMap) {
+      pickerMap = L.map(el, { scrollWheelZoom: false }).setView([lat, lng], 17);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap',
+      }).addTo(pickerMap);
+      pickerMarker = L.marker([lat, lng], { draggable: true }).addTo(pickerMap);
+      pickerMarker.on('dragend', () => {
+        const { lat: la, lng: ln } = pickerMarker.getLatLng();
+        setPickerCoords(la, ln);
+      });
+      pickerMap.on('click', (e) => {
+        pickerMarker.setLatLng(e.latlng);
+        setPickerCoords(e.latlng.lat, e.latlng.lng);
+      });
+      // Fix sizing if panel was hidden during init
+      setTimeout(() => pickerMap.invalidateSize(), 50);
+    } else {
+      pickerMap.setView([lat, lng], pickerMap.getZoom() || 17);
+      pickerMarker.setLatLng([lat, lng]);
+      setTimeout(() => pickerMap.invalidateSize(), 50);
+    }
+    setPickerCoords(lat, lng);
+  };
+
   const fillMapForm = () => {
     const m = content.site?.map || {};
     mapForm.elements.address1.value = m.address1 || '';
     mapForm.elements.address2.value = m.address2 || '';
     mapForm.elements.address3.value = m.address3 || '';
-    mapForm.elements.latitude.value = m.latitude ?? '';
-    mapForm.elements.longitude.value = m.longitude ?? '';
     mapForm.elements.mapsUrl.value = m.mapsUrl || '';
+    const lat = Number.isFinite(parseFloat(m.latitude)) ? parseFloat(m.latitude) : LOURMARIN_DEFAULT[0];
+    const lng = Number.isFinite(parseFloat(m.longitude)) ? parseFloat(m.longitude) : LOURMARIN_DEFAULT[1];
+    initPickerMap(lat, lng);
   };
   mapForm.addEventListener('submit', async (e) => {
     e.preventDefault();
