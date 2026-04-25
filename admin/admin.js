@@ -326,6 +326,7 @@
     { key: 'gallery-4', label: 'Galerie — large (horizontale)', defaultSrc: '/assets/photos/plat-11.jpg' },
     { key: 'gallery-5', label: 'Galerie — 5',                   defaultSrc: '/assets/photos/plat-13.jpg' },
     { key: 'gallery-6', label: 'Galerie — 6',                   defaultSrc: '/assets/photos/plat-05.jpg' },
+    { key: 'gallery-7', label: 'Galerie — 7',                   defaultSrc: '/assets/photos/plat-07.jpg' },
   ];
 
   const renderPhotosPanel = () => {
